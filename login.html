@@ -80,14 +80,13 @@
         </div>
     </form>
     <script>
-        var b = true;
         document.getElementById("loginButton").addEventListener("click", function (event) {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            if (username === "example" && password === "password") {
+            if (/^[A-Za-z]+$/.test(username) && password !== "") {
                 alert('Logged in successfully');
-                window.location.href = 'index.html';
+                window.location.href = 'dashboard.html';
             } else {
                 alert('Invalid username or password. Please try again.');
             }
