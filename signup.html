@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport content=" width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ededed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 2px solid #0da9b7;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #passwordNote {
+            display: block;
+            font-size: small;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            white-space: pre-line;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <h2>Signup Form</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="xyz@something.in" required>
+
+        <label for="phone">Enter your phone number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="e.g., 123-456-7890"
+            required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="password" required>
+        <input type="confirm password" id="cpassword" name="cpassword" placeholder="confirm password" required>
+        <note id="passwordNote">(password should contain minimum 6 letters with 1 small, 1 capital and 1 special
+            characters each)</note>
+
+        <button id="signupButton">Signup</button><br><br>
+        <a href="login.html">Click here to login</a> <!-- This link button redirects to the login page -->
+    </form>
+</body>
+<script>
+    document.getElementsByTagName("note")[0].style.width = document.getElementById("form").offsetWidth - 2 + "px";
+    document.getElementsByTagName("note")[1].style.width = document.getElementById("form").offsetWidth - 2 + "px";
+    var b = true;
+    document.getElementById("signupButton").addEventListener("click", function (event) {
+        var email = document.getElementById("email").value;
+        const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        if (!pattern.test(email)) {
+            alert('Enter a valid Email in the correct format');
+        }
+        var password = document.getElementById("password").value
+        const passpattern = /^(?=.[a-z])(?=.[A-Z])(?=.[!@#$%^&])[a-zA-Z!@#$%^&*]{6,}$/;
+        var pass = document.getElementById("password").value;
+        if (!passpattern.test(password)) {
+            alert('Enter a valid password in the correct format');
+        }
+        if (passpattern.test(password) && pattern.test(email) && b) {
+            alert("successfully signed up");
+            document.getElementById("form").submit();
+        }
+        var phone = document.getElementById("phone").value;
+        const phonePattern = /^\+91-[1-9]\d{9}$/;
+
+        if (!phonePattern.test(phone)) {
+            alert('Enter a valid Indian phone number in the correct format (e.g., +91-XXXXXXXXXX)');
+
+        }
+
+    });
+    var k = document.getElementById("cpassword").value
+    document.getElementById("cpassword").addEventListener("input", function (event) {
+
+        if (!(k == document.getElementById("password").value)) {
+            b = false;
+            document.getElementById("cnote").innerHTML = "both passwords must be same";
+            if (!b) {
+                setTimeout(function () {
+                    document.getElementById("cnote").innerHTML = "";
+                }, 50000);
+            }
+        }
+        else {
+            b = true;
+        }
+
+    }
+    )
+
+</script>
+
+</html>
